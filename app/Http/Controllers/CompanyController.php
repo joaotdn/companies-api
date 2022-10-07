@@ -34,7 +34,10 @@ class CompanyController extends Controller
             'description' => 'max:255',
             'name' => 'required|max:100'
         );
-        $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules, [
+            'email.unique' => 'Este email já existe',
+            'whatsapp.unique' => 'Este whatsapp já existe',
+        ]);
 
         $company = new Company;
         $company->name = $request->input('name');
