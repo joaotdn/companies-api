@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company as Company;
 use App\Http\Resources\Company as CompanyResource;
+use Illuminate\Support\Facades\Validator as Validator;
 
 class CompanyController extends Controller
 {
@@ -27,12 +28,24 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = array(
+            'email' => 'required|unique:companies|max:50',
+            'whatsapp' => 'required|unique:companies|max:50',
+            'description' => 'max:255',
+            'name' => 'required|max:100'
+        );
+        $validator = Validator::make($request->all(), $rules);
+
         $company = new Company;
         $company->name = $request->input('name');
         $company->description = $request->input('description');
         $company->email = $request->input('email');
         $company->whatsapp = $request->input('whatsapp');
 
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        
         if ($company->save()) {
             return new CompanyResource($company);
         }

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('email');
-            $table->string('whatsapp');
+            $table->string('email')->unique();
+            $table->string('whatsapp')->unique();
             $table->timestamps();
         });
     }
