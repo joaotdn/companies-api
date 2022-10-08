@@ -8,6 +8,25 @@ use Tests\TestCase;
 class CompanyTest extends TestCase
 {
     /** @test */
+    public function check_companies_comuns_is_correct() {
+        $company = new ModelsCompany();
+
+        $expect = [
+            'id',
+            'name',
+            'description',
+            'email',
+            'whatsapp',
+            'state',
+            'city'
+        ];
+
+        $array_compare = array_diff($expect, $company->getFillable());
+
+        $this->assertEquals(0, count($array_compare));
+    }
+
+    /** @test */
     public function email_and_whatsapp_duplicate()
     {
         $company1 = ModelsCompany::make([
