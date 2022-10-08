@@ -8,7 +8,7 @@ use Tests\TestCase;
 class CompanyTest extends TestCase
 {
     /** @test */
-    public function check_companies_comuns_is_correct() {
+    public function check_companies_columns_is_correct() {
         $company = new ModelsCompany();
 
         $expect = [
