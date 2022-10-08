@@ -14,6 +14,8 @@ class Company extends JsonResource
             'description' => $this->description,
             'email' => $this->email,
             'whatsapp' => $this->whatsapp,
+            'state' => $this->state,
+            'city' => $this->city,
         ];
     }
 }

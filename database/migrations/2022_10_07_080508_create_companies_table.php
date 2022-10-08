@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->string('city');
             $table->string('email')->unique();
             $table->string('whatsapp')->unique();
+            $table->string('state');
             $table->timestamps();
         });
     }
