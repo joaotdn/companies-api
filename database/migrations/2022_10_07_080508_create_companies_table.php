@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 150);
             $table->text('description');
-            $table->string('city');
-            $table->string('email')->unique();
-            $table->string('whatsapp')->unique();
-            $table->string('state');
+            $table->string('city', 50);
+            $table->string('email', 80)->unique();
+            $table->string('whatsapp', 20)->unique();
+            $table->string('state', 2);
             $table->timestamps();
         });
     }

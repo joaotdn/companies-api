@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Company;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class CompanySeeder extends Seeder
 {
@@ -15,13 +16,18 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('companies')->insert([
-            'name' => 'Company 2',
-            'description' => 'Description 2',
-            'email' => 'email3r@bol.com',
-            'whatsapp' => '1557390412222283',
-            'state' => 'XX',
-            'city' => 'JP'
-        ]);
+        $faker = Faker::create();
+        $i = 1;
+        while($i <= 10) {
+            $company = new Company();
+            $company->name = $faker->company();
+            $company->description = $faker->text(150);
+            $company->email = $faker->companyEmail();
+            $company->whatsapp = $faker->phoneNumber();
+            $company->state = $faker->randomElement(['PB', 'RJ', 'DF', 'SP', 'PA', 'MG']);
+            $company->city = $faker->city();
+            $company->save();
+            $i++;
+        }
     }
 }

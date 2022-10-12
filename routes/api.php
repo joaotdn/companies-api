@@ -33,3 +33,6 @@ Route::put('company/{id}', [CompanyController::class, 'update']);
 
 // Delete company
 Route::delete('company/{id}', [CompanyController::class,'destroy']);
+
+// Select all companies cities
+Route::get('locations', [CompanyController::class, 'locations']);

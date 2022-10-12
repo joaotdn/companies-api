@@ -100,4 +100,16 @@ class CompanyController extends Controller
             return new CompanyResource($company);
         }
     }
+
+    public function locations() {
+        $companies = Company::all()->toArray();
+        $locations = [];
+        if (count($companies) >= 1) {
+            foreach($companies as $i => $comapany) {
+                $locations[$i]['state'] = $comapany['state'];
+                $locations[$i]['city'] = $comapany['city'];
+            }
+        }
+        return $locations;
+    }
 }
