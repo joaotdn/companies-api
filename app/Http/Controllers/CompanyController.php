@@ -16,16 +16,21 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        if($_GET['name']) {
-            $companies = Company::where('name', 'like', '%'.$_GET['name'].'%')->get();
+        if(isset($_GET['name'])) {
+            $companies = Company::where('name', 'like', '%'.$_GET['name'].'%')->paginate(6);
             return CompanyResource::collection($companies);
         }
 
-        if($_GET['city']) {
-            $companies = Company::where('city', '=', $_GET['city'])->get();
+        if(!isset($_GET['name']) && isset($_GET['state'])) {
+            $companies = Company::where('state', '=', $_GET['state'])->paginate(6);
             return CompanyResource::collection($companies);
         }
-        
+
+        if(!isset($_GET['name']) && isset($_GET['state']) && isset($_GET['city'])) {
+            $companies = Company::where('state', '=', $_GET['state'])->where('city', '=', $_GET['city'])->paginate(6);
+            return CompanyResource::collection($companies);
+        }
+
         $companies = Company::paginate(6);
         return CompanyResource::collection($companies);
     }
