@@ -6,3 +6,7 @@ No terminal:
  - `php artisan migrate`
  - `php artisan db:seed`
  - `php artisan serve`
+
+Para realizar os testes:
+ 
+ - `php artisan test`

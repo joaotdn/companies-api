@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Company as ModelsCompany;
 use Tests\TestCase;
+use Faker\Factory as Faker;
 
 class CompanyTest extends TestCase
 {
@@ -12,7 +13,6 @@ class CompanyTest extends TestCase
         $company = new ModelsCompany();
 
         $expect = [
-            'id',
             'name',
             'description',
             'email',
@@ -57,13 +57,14 @@ class CompanyTest extends TestCase
 
     /** @test */
     public function stores_new_company() {
+        $faker = Faker::create();
         $response = $this->post('/api/company', [
-            'name' => 'Company 2',
-            'description' => 'Description 2',
-            'email' => 'email3r@bol.com',
-            'whatsapp' => '1557390412222283',
-            'state' => 'XX',
-            'city' => 'JP'
+            'name' => $faker->company(),
+            'description' => $faker->realText(),
+            'email' => $faker->companyEmail(),
+            'whatsapp' => $faker->phoneNumber(),
+            'state' => $faker->randomElement(['PB', 'RJ', 'DF', 'SP', 'PA', 'MG']),
+            'city' => $faker->city()
         ]);
 
         $response->assertStatus(201);
