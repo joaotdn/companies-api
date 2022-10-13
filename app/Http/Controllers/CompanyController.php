@@ -17,17 +17,7 @@ class CompanyController extends Controller
     public function index()
     {
         if(isset($_GET['name'])) {
-            $companies = Company::where('name', 'like', '%'.$_GET['name'].'%')->paginate(6);
-            return CompanyResource::collection($companies);
-        }
-
-        if(!isset($_GET['name']) && isset($_GET['state'])) {
-            $companies = Company::where('state', '=', $_GET['state'])->paginate(6);
-            return CompanyResource::collection($companies);
-        }
-
-        if(!isset($_GET['name']) && isset($_GET['state']) && isset($_GET['city'])) {
-            $companies = Company::where('state', '=', $_GET['state'])->where('city', '=', $_GET['city'])->paginate(6);
+            $companies = Company::where('name', 'like', '%'.$_GET['name'].'%')->get();
             return CompanyResource::collection($companies);
         }
 
